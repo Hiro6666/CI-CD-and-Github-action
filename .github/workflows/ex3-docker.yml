@@ -17,4 +17,7 @@ jobs:
         run: docker build -t ex3-docker-app ./ex3-docker
 
       - name: Execute docker image
-        run: docker run -p 5000:5000 ex3-docker-app
+        run: |
+          docker run -d -p 5000:5000 ex3-docker-app
+          sleep 10
+          docker stop $(docker ps -q)
