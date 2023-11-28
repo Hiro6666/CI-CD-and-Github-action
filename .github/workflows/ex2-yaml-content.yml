@@ -1,5 +1,5 @@
 # Workflow Name
-name: CI
+name: yaml-content-example
 
 # When to trigger the workflow
 on:
