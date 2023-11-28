@@ -1,0 +1,35 @@
+# Workflow Name
+name: CI
+
+# When to trigger the workflow
+on:
+  # Trigger the workflow when creating branches and pull requests on the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  # Allow manual execution of the workflow from the Actions tab
+  workflow_dispatch:
+
+# Jobs can run sequentially or in parallel
+jobs:
+  # This workflow has only one job named "build"
+  build:
+    # This job will run on a runner with the Ubuntu operating system
+    runs-on: ubuntu-latest
+
+    # As part of the job, steps are executed sequentially
+    steps:
+      # Check out your repository under $GITHUB_WORKSPACE so your workflow can access it
+      - uses: actions/checkout@v2
+
+      # Use a shell to display "Hello, world!" on the runner
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Execute a set of commands
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
