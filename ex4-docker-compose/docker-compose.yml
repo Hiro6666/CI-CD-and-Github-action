@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    command: gunicorn -b "0.0.0.0:8080" -w 4 app:app
+    container_name: ex4-app
+    restart: always
+    ports:
+      - "127.0.0.1:8080:8080"
+  db:
+    image: mariadb:10.5
+    container_name: ex4-db
+    restart: always
+
+networks:
+  payment:
+    driver: bridge

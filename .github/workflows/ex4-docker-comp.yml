@@ -1,0 +1,23 @@
+name: Docker-compose example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Compose
+        run: docker-compose -f ex4-docker-compose/docker-compose.yml up -d
+
+      - name: Wait for services to start
+        run: sleep 30
+
+      - name: Stop Docker Compose
+        run: docker-compose -f ex4-docker-compose/docker-compose.yml down
