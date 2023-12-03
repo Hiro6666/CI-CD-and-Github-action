@@ -13,18 +13,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Python environment with Pyenv and Poetry
-        run: |
-          curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-          echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> $HOME/.bashrc
-          echo 'eval "$(pyenv init -)"' >> $HOME/.bashrc
-          echo 'eval "$(pyenv virtualenv-init -)"' >> $HOME/.bashrc
-          source $HOME/.bashrc
-          pyenv install 2.3.30
-          curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.7.0 python -
-          source $HOME/.poetry/env
-          pyenv install 3.10.12
-          pyenv local 3.10.12
-          poetry env use 3.10.12
-          poetry shell
+      - name: Install python build tools
         shell: bash
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
+          libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+          libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev ffmpeg
+
+      - name: Install pyenv
+        shell: bash
+        run: |
+          git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
+          cd $HOME/.pyenv
+          git checkout cb5da5e831fb50ce0ac44fc13617965b2309a482
+
+      - name: Setup environment variables
+        shell: bash
+        run: |
+          PYENV_ROOT="$HOME/.pyenv"
+          PYENV_BIN="$PYENV_ROOT/bin"
+          echo "$PYENV_BIN" >> $GITHUB_PATH
+          echo "PYENV_ROOT=$PYENV_ROOT" >> $GITHUB_ENV
+
+      - name: Check pyenv version
+        shell: bash
+        run: |
+          pyenv --version
