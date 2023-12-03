@@ -54,9 +54,9 @@ jobs:
       - name: Set up Python environment with Pyenv and Poetry
         shell: bash
         run: |
+          cd ex5-pyenv-poetry
           pyenv install 3.10.12
           pyenv local 3.10.12
-          cd ex5-pyenv-poetry
           poetry env use 3.10.12
           poetry install --no-root
 
