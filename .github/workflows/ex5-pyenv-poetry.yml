@@ -26,7 +26,7 @@ jobs:
         run: |
           git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
           cd $HOME/.pyenv
-          git checkout cb5da5e831fb50ce0ac44fc13617965b2309a482
+          git checkout f50b99265c3abd72064f2ea5f4f6ae583e8f3688
 
       - name: Setup environment variables
         shell: bash
