@@ -54,21 +54,15 @@ jobs:
       - name: Set up Python environment with Pyenv and Poetry
         shell: bash
         run: |
-          ls
-          cd ex5-pyenv-poertry
           pyenv install 3.10.12
           pyenv local 3.10.12
           poetry env use 3.10.12
-          poetry install
+          poetry install --no-root
 
       - name: Check code style
         run: |
-          ls
-          cd ex5-pyenv-poertry
           poetry run pre-commit run --all-files
 
       - name: Check code security
         run: |
-          ls
-          cd ex5-pyenv-poertry
           poetry run bandit -r .
