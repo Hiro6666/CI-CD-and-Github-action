@@ -1,0 +1,30 @@
+name: Payment system workflows
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  check-and-build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python environment with Pyenv and Poetry
+        run: |
+          curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+          echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> $HOME/.bashrc
+          echo 'eval "$(pyenv init -)"' >> $HOME/.bashrc
+          echo 'eval "$(pyenv virtualenv-init -)"' >> $HOME/.bashrc
+          source $HOME/.bashrc
+          pyenv install 2.3.30
+          curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.7.0 python -
+          source $HOME/.poetry/env
+          pyenv install 3.10.12
+          pyenv local 3.10.12
+          poetry env use 3.10.12
+          poetry shell
+        shell: bash
