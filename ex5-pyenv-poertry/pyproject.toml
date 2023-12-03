@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "ex5-pyenv-poertry"
+version = "0.1.0"
+description = ""
+authors = ["Hiro6666 <cryptohiro6666@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+isort = "^5.12.0"
+flask = "3.0.0"
+gunicorn = "21.2.0"
+pre-commit = "v4.3.0"
+flake8 = "^6.1.0"
+yapf = "v0.32.0"
+bandit = "^1.7.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+line_length = 88
+indent = '    '
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+src_paths = ['.']

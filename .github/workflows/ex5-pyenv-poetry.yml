@@ -1,4 +1,4 @@
-name: Payment system workflows
+name: pyenv poetry example
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
-          libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+          libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libmariadb-dev \
           libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev ffmpeg
 
       - name: Install pyenv
@@ -42,9 +42,9 @@ jobs:
           pyenv --version
 
       - name: Install Poetry
+        shell: bash
         run: |
           curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.7.0 python -
-        shell: bash
 
       - name: Check poetry version
         shell: bash
@@ -52,10 +52,15 @@ jobs:
           poetry --version
 
       - name: Set up Python environment with Pyenv and Poetry
+        shell: bash
         run: |
           pyenv install 3.10.12
           pyenv local 3.10.12
           poetry env use 3.10.12
-          poetry shell
           poetry install
-        shell: bash
+
+      - name: Check code style
+        run: poetry run pre-commit run --all-files
+
+      - name: Check code security
+        run: poetry run bandit -r .
