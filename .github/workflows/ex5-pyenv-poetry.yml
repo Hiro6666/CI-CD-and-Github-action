@@ -50,3 +50,12 @@ jobs:
         shell: bash
         run: |
           poetry --version
+
+      - name: Set up Python environment with Pyenv and Poetry
+        run: |
+          pyenv install 3.10.12
+          pyenv local 3.10.12
+          poetry env use 3.10.12
+          poetry shell
+          poetry install
+        shell: bash
