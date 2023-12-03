@@ -56,13 +56,16 @@ jobs:
         run: |
           pyenv install 3.10.12
           pyenv local 3.10.12
+          cd ex5-pyenv-poetry
           poetry env use 3.10.12
           poetry install --no-root
 
       - name: Check code style
         run: |
+          cd ex5-pyenv-poetry
           poetry run pre-commit run --all-files
 
       - name: Check code security
         run: |
+          cd ex5-pyenv-poetry
           poetry run bandit -r .
