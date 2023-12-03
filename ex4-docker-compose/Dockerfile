@@ -4,4 +4,3 @@ COPY app.py .
 RUN pip install Flask gunicorn
 
 CMD ["python", "app.py", "&", ">>", "app.log"]
-

@@ -14,7 +14,7 @@ Feature in GitHub to create custom Automated Workflows
 **3. YAML file content format**
 ```yaml
 # Workflow Name
-name: 
+name:
 
 # When to trigger the workflow
 on:
