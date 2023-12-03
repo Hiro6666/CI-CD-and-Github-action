@@ -40,3 +40,14 @@ jobs:
         shell: bash
         run: |
           pyenv --version
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.7.0 python -
+          source $HOME/.poetry/env
+        shell: bash
+
+      - name: Check poetry version
+        shell: bash
+        run: |
+          poetry --version
